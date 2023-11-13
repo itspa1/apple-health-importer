@@ -26,6 +26,14 @@ services:
     volumes:
       - grafana-storage:/var/lib/grafana
 
+  importer:
+    image: ghcr.io/itspa1/apple-health-importer:latest
+    ports:
+      - "9999:9999"
+    restart: always
+    volumes:
+      - ./.env:/app/.env
+
 volumes:
   influxdb-storage:
   grafana-storage:
