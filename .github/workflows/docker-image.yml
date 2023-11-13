@@ -19,10 +19,9 @@ jobs:
     - name: Build the arm Docker image
       run: docker build . --file Dockerfile -t apple-health-importer:arm64 --platform linux/arm64/v8
     - name: Login to registry
-      run: echo ${{ secrets.GH_ACTION_SECRET }} | docker login ghcr.io -u itspa1 --password-stdin
+      run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login hub.docker.com -u itspa1 --password-stdin
     - name: Push to registry
       run: |
-            docker tag apple-health-importer:latest ghcr.io/itspa1/apple-health-importer:latest
-            docker push ghcr.io/itspa1/apple-health-importer:latest
-            docker tag apple-health-importer:arm64 ghcr.io/itspa1/apple-health-importer:arm64
-            docker push ghcr.io/itspa1/apple-health-importer:arm64
+            docker push itspa1/apple-health-importer:latest
+            docker tag apple-health-importer:arm64 itspa1/apple-health-importer:arm64
+            docker push itspa1/apple-health-importer:arm64

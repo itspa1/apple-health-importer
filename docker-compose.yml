@@ -27,7 +27,7 @@ services:
       - grafana-storage:/var/lib/grafana
 
   importer:
-    image: ghcr.io/itspa1/apple-health-importer:latest
+    image: ghcr.io/itspa1/apple-health-importer:${ARCHITECTURE}
     ports:
       - "9999:9999"
     restart: always
