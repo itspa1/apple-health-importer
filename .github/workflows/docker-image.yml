@@ -13,6 +13,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag apple-health-importer:$(date +%s)
+      run: docker build . --file Dockerfile -t apple-health-importer:latest
+    - name: Login to registry
+      run: echo ${{ secrets.GH_ACTION_SECRET }} | docker login ghcr.io -u itspa1 --password-stdin
+    - name: Push to registry
+      run: |
+            docker tag apple-health-importer:latest ghcr.io/itspa1/apple-health-importer:latest
+            docker push ghcr.io/itspa1/apple-health-importer:latest
